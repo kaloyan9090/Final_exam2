@@ -8,6 +8,9 @@ const leadRateValue = document.getElementById('leadRateValue');
 const prospectRateValue = document.getElementById('prospectRateValue');
 const leadRateLabel = document.getElementById('leadRateLabel');
 const customerRateLabel = document.getElementById('customerRateLabel');
+const prospectsMeter = document.getElementById('prospectsMeter');
+const leadsMeter = document.getElementById('leadsMeter');
+const customersMeter = document.getElementById('customersMeter');
 const leadsOutput = document.getElementById('leads');
 const customersOutput = document.getElementById('customers');
 const prospectsOutput = document.getElementById('prospects');
@@ -123,6 +126,10 @@ function updateStats() {
   leadsOutput.textContent = leads;
   customersOutput.textContent = customers;
   prospectsOutput.textContent = prospects;
+
+  prospectsMeter.style.width = '100%';
+  leadsMeter.style.width = `${Math.round((leads / prospects) * 100)}%`;
+  customersMeter.style.width = `${Math.round((customers / prospects) * 100)}%`;
 
   validateDateInput(startDateInput);
   validateDateInput(endDateInput);
