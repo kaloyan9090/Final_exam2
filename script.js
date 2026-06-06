@@ -119,6 +119,73 @@ function validateDateInput(input) {
   return date;
 }
 
+function drawChart(prospects, leads, customers) {
+  const svg = document.getElementById('chart');
+  if (!svg) return;
+  const w = 760;
+  const h = 430;
+  const padding = 28;
+  const chartW = w - padding * 2;
+  const chartH = h - padding * 2 - 30; // leave room for labels
+
+  const max = Math.max(prospects, leads, customers, 1);
+
+  // clear
+  while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+  // background rounded rect (keeps existing style but ensures visibility)
+  const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  bg.setAttribute('x', 0);
+  bg.setAttribute('y', 0);
+  bg.setAttribute('width', w);
+  bg.setAttribute('height', h);
+  bg.setAttribute('rx', 20);
+  bg.setAttribute('fill', 'none');
+  svg.appendChild(bg);
+
+  const names = ['Prospects', 'Leads', 'Customers'];
+  const values = [prospects, leads, customers];
+  const colors = ['#2e7d32', '#1e90ff', '#7bca6b'];
+
+  const barSlot = chartW / 6;
+  const barWidth = barSlot * 1.6;
+
+  values.forEach((val, i) => {
+    const x = padding + barSlot * (i * 2 + 1) - barWidth / 2;
+    const barH = Math.round((val / max) * chartH);
+    const y = padding + (chartH - barH);
+
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('x', x);
+    rect.setAttribute('y', y);
+    rect.setAttribute('width', barWidth);
+    rect.setAttribute('height', barH);
+    rect.setAttribute('rx', 8);
+    rect.setAttribute('fill', colors[i]);
+    svg.appendChild(rect);
+
+    // value label
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('x', x + barWidth / 2);
+    text.setAttribute('y', y - 8);
+    text.setAttribute('text-anchor', 'middle');
+    text.setAttribute('fill', '#ffffff');
+    text.setAttribute('font-size', '14');
+    text.textContent = String(val);
+    svg.appendChild(text);
+
+    // name label
+    const name = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    name.setAttribute('x', x + barWidth / 2);
+    name.setAttribute('y', padding + chartH + 20);
+    name.setAttribute('text-anchor', 'middle');
+    name.setAttribute('fill', '#cfead1');
+    name.setAttribute('font-size', '12');
+    name.textContent = names[i];
+    svg.appendChild(name);
+  });
+}
+
 function updateStats() {
   const leadPercent = Number(leadRate.value);
   const prospectPercent = Number(prospectRate.value);
@@ -137,6 +204,9 @@ function updateStats() {
   prospectsMeter.style.width = '100%';
   leadsMeter.style.width = `${Math.round((leads / prospects) * 100)}%`;
   customersMeter.style.width = `${Math.round((customers / prospects) * 100)}%`;
+
+  // update svg chart
+  drawChart(prospects, leads, customers);
 
   validateDateInput(startDateInput);
   validateDateInput(endDateInput);
