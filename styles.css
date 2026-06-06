@@ -1,0 +1,148 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: #eef2f7;
+  color: #1f2937;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  min-height: 100vh;
+  gap: 24px;
+  padding: 24px;
+}
+
+.panel {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+}
+
+.controls {
+  display: grid;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: #1d4ed8;
+  color: white;
+  font-weight: 700;
+}
+
+.controls label,
+.sliders label {
+  display: grid;
+  gap: 10px;
+  font-size: 0.95rem;
+}
+
+.controls select,
+.controls input,
+.sliders input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  background: #f8fafc;
+  color: #111827;
+}
+
+.dashboard {
+  display: grid;
+  gap: 24px;
+}
+
+.chart-panel {
+  display: grid;
+  gap: 24px;
+}
+
+#chart {
+  width: 100%;
+  height: 320px;
+  background: linear-gradient(180deg, #e0e7ff 0%, #f8fafc 100%);
+  border-radius: 20px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  padding: 18px;
+  border-radius: 20px;
+  background: #f8fafc;
+}
+
+.stat-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 0.95rem;
+}
+
+output {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.meter {
+  position: relative;
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.meter span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+}
+
+.sliders {
+  display: grid;
+  gap: 18px;
+}
+
+.sliders label {
+  gap: 12px;
+}
+
+.sliders input[type="range"] {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}
