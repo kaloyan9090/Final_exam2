@@ -55,6 +55,13 @@ body {
   font-size: 0.95rem;
 }
 
+.controls label span,
+.sliders label span {
+  display: block;
+  white-space: normal;
+  word-break: break-word;
+}
+
 .controls select,
 .controls input,
 .sliders input {
@@ -128,7 +135,8 @@ output {
 .meter span {
   display: block;
   height: 100%;
-  width: 100%;
+  width: 0;
+  transition: width 0.25s ease;
   background: linear-gradient(90deg, #66bb6a, #81c784);
 }
 

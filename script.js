@@ -46,7 +46,8 @@ const translation = {
     customers: 'Customers',
     leadResponse: 'Lead Response Rate',
     prospectResponse: 'Prospect Response Rate',
-    currencies: ['$ US Dollar', 'Euro', 'BGN Lev']
+    currencies: ['$ US Dollar', 'Euro', 'BGN Lev'],
+    languageOptions: ['English', 'Bulgarian']
   },
   bg: {
     pageTitle: 'Предсказател на лийдове',
@@ -62,7 +63,8 @@ const translation = {
     customers: 'Клиенти',
     leadResponse: 'Процент отговор на лийд',
     prospectResponse: 'Процент отговор на перспектива',
-    currencies: ['$ Щатски долар', 'Евро', 'BGN Лев']
+    currencies: ['$ Щатски долар', 'Евро', 'BGN Лев'],
+    languageOptions: ['Английски', 'Български']
   }
 };
 
@@ -84,6 +86,11 @@ function translatePage() {
   customersTitle.textContent = texts.customers;
   leadResponseLabel.textContent = texts.leadResponse;
   prospectResponseLabel.textContent = texts.prospectResponse;
+
+  const languageOptions = languageSelect.querySelectorAll('option');
+  languageOptions.forEach((option, index) => {
+    option.textContent = texts.languageOptions[index] || option.textContent;
+  });
 
   const currencyOptions = currencySelect.querySelectorAll('option');
   currencyOptions.forEach((option, index) => {
